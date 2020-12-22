@@ -3,26 +3,10 @@ import pandas as pd
 def proportion_of_education():
     df= pd.read_csv('NISPUF17.csv', index_col=0)
     num_of_vals= len(df['EDUC1'])
-    entry1=0
-    entry2=0
-    entry3=0
-    entry4=0
-    for entry in df['EDUC1']:
-        if entry==1:
-            entry1+=1
-        elif entry==2:
-            entry2+=1
-        elif entry==3:
-            entry3+=1
-        elif entry==4:
-            entry4+=1
-    num1=entry1/num_of_vals
-    num2=entry2/num_of_vals
-    num3=entry3/num_of_vals
-    num4=entry4/num_of_vals
-    final={'less than high school': num1, "high school": num2,
-        "more than high school but not college": num3,
-        "college": num4}
+    vals= df['EDUC1'].value_counts().tolist()
+    final={'less than high school': vals[3]/num_of_vals, "high school": vals[2]/num_of_vals,
+        "more than high school but not college": vals[1]/num_of_vals,
+        "college": vals[0]/num_of_vals}
     return final
 
 print(proportion_of_education())
